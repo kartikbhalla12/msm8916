@@ -317,7 +317,7 @@ static void *bam_ipc_log_txt;
 
 /**
  * Log a state change along with a small message.
- * Complete size of messsage is limited to @todo.
+ * Complete size of message is limited to @todo.
  * Logging is done using IPC Logging infrastructure.
  *
  * States
@@ -488,7 +488,7 @@ static void queue_rx_work_func(struct work_struct *work)
 {
 	/*
 	 * Cold path.  Delays can be tolerated.  Use of GFP_KERNEL should
-	 * guarentee the requested memory will be found, after some ammount of
+	 * guarantee the requested memory will be found, after some ammount of
 	 * delay.
 	 */
 	__queue_rx(GFP_KERNEL);
@@ -1488,7 +1488,7 @@ static void bam_mux_tx_notify(struct sps_event_notify *notify)
 		queue_work(bam_mux_tx_workqueue, &pkt->work);
 		break;
 	default:
-		pr_err("%s: recieved unexpected event id %d\n", __func__,
+		pr_err("%s: received unexpected event id %d\n", __func__,
 			notify->event_id);
 	}
 }
@@ -1539,7 +1539,7 @@ static void bam_mux_rx_notify(struct sps_event_notify *notify)
 		}
 		break;
 	default:
-		pr_err("%s: recieved unexpected event id %d\n", __func__,
+		pr_err("%s: received unexpected event id %d\n", __func__,
 			notify->event_id);
 	}
 }

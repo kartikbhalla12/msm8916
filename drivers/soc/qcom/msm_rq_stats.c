@@ -161,6 +161,7 @@ static int cpu_hotplug_handler(struct notifier_block *nb,
 		if (!this_cpu->cur_freq)
 			this_cpu->cur_freq = cpufreq_quick_get(cpu);
 		update_related_cpus();
+		/* fall through */
 	case CPU_ONLINE_FROZEN:
 		this_cpu->avg_load_maxfreq = 0;
 	}
@@ -246,8 +247,10 @@ static ssize_t store_run_queue_poll_ms(struct kobject *kobj,
 	mutex_lock(&lock_poll_ms);
 
 	spin_lock_irqsave(&rq_lock, flags);
-	sscanf(buf, "%u", &val);
-	rq_info.rq_poll_jiffies = msecs_to_jiffies(val);
+	if (kstrtouint(buf, 0, &val))
+		count = -EINVAL;
+	else
+		rq_info.rq_poll_jiffies = msecs_to_jiffies(val);
 	spin_unlock_irqrestore(&rq_lock, flags);
 
 	mutex_unlock(&lock_poll_ms);
@@ -277,7 +280,9 @@ static ssize_t store_def_timer_ms(struct kobject *kobj,
 {
 	unsigned int val = 0;
 
-	sscanf(buf, "%u", &val);
+	if (kstrtouint(buf, 0, &val))
+		return -EINVAL;
+
 	rq_info.def_timer_jiffies = msecs_to_jiffies(val);
 
 	rq_info.def_start_time = ktime_to_ns(ktime_get());

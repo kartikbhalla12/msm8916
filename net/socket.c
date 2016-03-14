@@ -2421,9 +2421,6 @@ int __sys_recvmmsg(int fd, struct mmsghdr __user *mmsg, unsigned int vlen,
 			break;
 	}
 
-	if (err == 0)
-		goto out_put;
-
 	if (datagrams == 0) {
 		datagrams = err;
 		goto out_put;

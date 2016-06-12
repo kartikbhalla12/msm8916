@@ -38,8 +38,19 @@
 #define POWER_SUSPEND_PANEL	2	// Use display panel state as hook
 #define POWER_SUSPEND_HYBRID	3	// Use display panel state and autosleep as hook
 
+#ifdef CONFIG_ASMP
+enum {
+	POWER_SUSPEND_LEVEL_BLANK_SCREEN = 50,
+	POWER_SUSPEND_LEVEL_STOP_DRAWING = 100,
+	POWER_SUSPEND_LEVEL_DISABLE_FB = 150,
+};
+#endif
+
 struct power_suspend {
 	struct list_head link;
+	#ifdef CONFIG_ASMP
+	int level;
+	#endif
 	void (*suspend)(struct power_suspend *h);
 	void (*resume)(struct power_suspend *h);
 };

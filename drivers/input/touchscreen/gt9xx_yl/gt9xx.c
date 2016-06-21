@@ -687,6 +687,7 @@ static void goodix_ts_work_func(struct work_struct *work)
                 doze_status = DOZE_WAKEUP;
                 sprintf(wakeup_slide,"e");
                 envp = e_wakeup;	//added by yewenliang for test
+		gesture_key = KEY_GESTURE_SLIDE_E;
             }
             else if ((doze_buf[2] == 0x6D) && (support_gesture & TW_SUPPORT_M_SLIDE_WAKEUP))
             {
@@ -694,6 +695,7 @@ static void goodix_ts_work_func(struct work_struct *work)
                 doze_status = DOZE_WAKEUP;
                 sprintf(wakeup_slide,"m");
                 envp = m_wakeup;	//added by yewenliang for test
+		gesture_key = KEY_GESTURE_SLIDE_M;
             }
             else if ((doze_buf[2] == 0x6F) && (support_gesture & TW_SUPPORT_O_SLIDE_WAKEUP))
             {
@@ -709,6 +711,7 @@ static void goodix_ts_work_func(struct work_struct *work)
                 doze_status = DOZE_WAKEUP;
                 sprintf(wakeup_slide,"w");
                 envp = w_wakeup;	//added by yewenliang for test
+	gesture_key = KEY_GESTURE_SLIDE_W;
             }
             else
             {
@@ -1605,6 +1608,9 @@ static s8 gtp_request_input_dev(struct goodix_ts_data *ts)
     set_bit(KEY_GESTURE_SLIDE_RIGHT, ts->input_dev->keybit);
     set_bit(KEY_GESTURE_SLIDE_C, ts->input_dev->keybit);
     set_bit(KEY_GESTURE_SLIDE_O, ts->input_dev->keybit);
+    set_bit(KEY_GESTURE_SLIDE_E, ts->input_dev->keybit);
+    set_bit(KEY_GESTURE_SLIDE_M, ts->input_dev->keybit);
+    set_bit(KEY_GESTURE_SLIDE_W, ts->input_dev->keybit);
 #endif 
 #if GTP_CHANGE_X2Y
     GTP_SWAP(ts->abs_x_max, ts->abs_y_max);

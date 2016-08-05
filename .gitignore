@@ -15,9 +15,11 @@
 *.a
 *.s
 *.ko
+*.img
 *.so
 *.so.dbg
 *.mod.c
+dtbToolCM
 *.i
 *.lst
 *.symtypes

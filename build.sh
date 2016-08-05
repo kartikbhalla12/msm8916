@@ -80,7 +80,7 @@ echo -e "$blue                      ~COPYING FILES       $nocol  "
 cp arch/arm64/boot/dt.img ~/phenex/tools
 cp arch/arm64/boot/Image ~/phenex/tools
 echo -e "$blue                        ~MAKING ZIP        $nocol  "
-echo -e " Version : ?"
+cd ~/phenex
 today=$(date +"-%Y%m%d-%H:%M")
 zip -r Phenex_v$ver$today.zip *
 mv *.zip ~/phenex_out

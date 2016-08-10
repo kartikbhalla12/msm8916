@@ -65,6 +65,9 @@ echo -n " YOUR CHOICE : ? "
 read ch
 echo -n " VERSION : ? "
 read ver
+echo -n " OLD VERSION : ? "
+read old
+replace $old $ver -- ~/msm8916/arch/arm64/configs/cyanogenmod_lettuce-64_defconfig
 case $ch in
 1) echo -e "$cyan                            DIRTY $nocol"
    echo -e "$cyan                          BUILDING NOW ..$nocol"
